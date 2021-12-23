@@ -11,8 +11,8 @@ public class Affiliate {
     private Double monthlyFee;
     private List<AdditionalServiceFee> additionalServiceFees;
 
-    public Affiliate(UUID id, String documentNumber, Double monthlyFee) {
-        this.id = id;
+    public Affiliate(String documentNumber, Double monthlyFee) {
+        this.id = UUID.randomUUID();
         this.documentNumber = documentNumber;
         this.monthlyFee = monthlyFee;
     }
@@ -54,5 +54,15 @@ public class Affiliate {
             return (additionalServiceFee.getDate().isAfter(begin) || additionalServiceFee.getDate().isEqual(begin))
                     && (additionalServiceFee.getDate().isBefore(end) || additionalServiceFee.getDate().isEqual(end));
         }).mapToDouble(AdditionalServiceFee::getFee).sum();
+    }
+
+    @Override
+    public String toString() {
+        return "Affiliate{" +
+                "id=" + id +
+                ", documentNumber='" + documentNumber + '\'' +
+                ", monthlyFee=" + monthlyFee +
+                ", additionalServiceFees=" + additionalServiceFees +
+                "}\n";
     }
 }
