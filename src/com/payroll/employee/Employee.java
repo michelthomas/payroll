@@ -1,5 +1,10 @@
 package com.payroll.employee;
 
+import com.payroll.payment.PaymentCheck;
+import com.payroll.payment.PaymentInfo;
+
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 public abstract class Employee {
@@ -8,6 +13,8 @@ public abstract class Employee {
     private String documentNumber;
     private String name;
     private String address;
+    private PaymentInfo paymentInfo;
+    private List<PaymentCheck> paymentChecks;
 
     public Employee(String documentNumber, String name, String address) {
         this.id = UUID.randomUUID();
@@ -52,4 +59,37 @@ public abstract class Employee {
     }
 
     public abstract Double calculateGrossSalary();
+
+    public PaymentInfo getPaymentInfo() {
+        return this.paymentInfo;
+    }
+
+    public void setPaymentInfo(PaymentInfo paymentInfo) {
+        this.paymentInfo = paymentInfo;
+    }
+
+    public List<PaymentCheck> getPaymentChecks() {
+        return paymentChecks;
+    }
+
+    public void setPaymentChecks(List<PaymentCheck> paymentChecks) {
+        this.paymentChecks = paymentChecks;
+    }
+
+    public PaymentCheck getLastPaymentCheck() {
+        return this.paymentChecks.stream()
+                .max(Comparator.comparing(PaymentCheck::getDate))
+                .orElse(null);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", documentNumber='" + documentNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", paymentInfo=" + paymentInfo +
+                "}\n";
+    }
 }
