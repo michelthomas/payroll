@@ -1,6 +1,7 @@
 package com.payroll.payment.schedule;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Monthly implements PaymentSchedule {
@@ -21,11 +22,11 @@ public class Monthly implements PaymentSchedule {
 
     @Override
     public List<Integer> getPaydaysInTheMonth() {
-        return null;
+        return new ArrayList<>(day);
     }
 
     @Override
-    public List<Integer> getPaydaysInTheMonthByDate(Date date) {
-        return null;
+    public List<Integer> getPaydaysInTheMonthByDate(LocalDate date) {
+        return new ArrayList<>(day);
     }
 }

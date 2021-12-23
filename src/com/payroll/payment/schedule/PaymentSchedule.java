@@ -1,12 +1,12 @@
 package com.payroll.payment.schedule;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PaymentSchedule {
 
     List<Integer> getPaydaysInTheMonth();
 
-    List<Integer> getPaydaysInTheMonthByDate(Date date);
+    List<Integer> getPaydaysInTheMonthByDate(LocalDate date);
 
 }
