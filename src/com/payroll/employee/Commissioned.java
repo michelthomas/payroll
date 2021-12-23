@@ -1,5 +1,8 @@
 package com.payroll.employee;
 
+import com.payroll.DB;
+import com.payroll.payment.PaymentInfo;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -14,12 +17,14 @@ public class Commissioned extends Employee {
         super(documentNumber, name, address);
         this.baseSalary = baseSalary;
         this.percentage = percentage;
+        this.setPaymentInfo(new PaymentInfo(DB.getInstance().paymentSchedules.get("semanal-2-sexta"), null));
     }
 
     public Commissioned(UUID id, String documentNumber, String name, String address, Double baseSalary, Double percentage) {
         super(id, documentNumber, name, address);
         this.baseSalary = baseSalary;
         this.percentage = percentage;
+        this.setPaymentInfo(new PaymentInfo(DB.getInstance().paymentSchedules.get("semanal-2-sexta"), null));
     }
 
     public Double getBaseSalary() {
@@ -61,7 +66,7 @@ public class Commissioned extends Employee {
 
     @Override
     public String toString() {
-        return "Commissioned{" +
+        return "\nCommissioned{" +
                 super.toString() +
                 "baseSalary=" + baseSalary +
                 ", percentage=" + percentage +

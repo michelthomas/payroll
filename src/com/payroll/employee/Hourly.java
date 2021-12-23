@@ -1,5 +1,8 @@
 package com.payroll.employee;
 
+import com.payroll.DB;
+import com.payroll.payment.PaymentInfo;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -13,11 +16,13 @@ public class Hourly extends Employee {
     public Hourly(String documentNumber, String name, String address, Double hourlySalary) {
         super(documentNumber, name, address);
         this.hourlySalary = hourlySalary;
+        this.setPaymentInfo(new PaymentInfo(DB.getInstance().paymentSchedules.get("semanal-1-sexta"), null));
     }
 
     public Hourly(UUID id, String documentNumber, String name, String address, Double hourlySalary) {
         super(id, documentNumber, name, address);
         this.hourlySalary = hourlySalary;
+        this.setPaymentInfo(new PaymentInfo(DB.getInstance().paymentSchedules.get("semanal-1-sexta"), null));
     }
 
     public Double getHourlySalary() {
@@ -55,7 +60,7 @@ public class Hourly extends Employee {
 
     @Override
     public String toString() {
-        return "Hourly{" +
+        return "\nHourly{" +
                 super.toString() +
                 "hourlySalary=" + hourlySalary +
                 ", timeCards=" + timeCards +

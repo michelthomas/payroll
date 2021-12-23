@@ -1,5 +1,9 @@
 package com.payroll.employee;
 
+import com.payroll.DB;
+import com.payroll.payment.PaymentInfo;
+import com.payroll.payment.method.Deposit;
+
 import java.util.UUID;
 
 public class Salaried extends Employee {
@@ -9,6 +13,7 @@ public class Salaried extends Employee {
     public Salaried(String documentNumber, String name, String address, Double monthlySalary) {
         super(documentNumber, name, address);
         this.monthlySalary = monthlySalary;
+        this.setPaymentInfo(new PaymentInfo(DB.getInstance().paymentSchedules.get("mensal-$"), null));
     }
 
     public Salaried(UUID id, String documentNumber, String name, String address, Double monthlySalary) {
@@ -31,7 +36,7 @@ public class Salaried extends Employee {
 
     @Override
     public String toString() {
-        return "Salaried{" +
+        return "\nSalaried{" +
                 super.toString() +
                 "monthlySalary=" + monthlySalary +
                 "}\n";
