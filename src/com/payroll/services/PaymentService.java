@@ -1,15 +1,13 @@
-package com.payroll.payment;
+package com.payroll.services;
 
 import com.payroll.DB;
-import com.payroll.employee.Employee;
-import com.payroll.payment.schedule.PaymentSchedule;
-import com.payroll.syndicate.Affiliate;
+import com.payroll.models.employee.Employee;
+import com.payroll.models.payment.PaymentCheck;
+import com.payroll.models.syndicate.Affiliate;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Year;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class PaymentService {
 

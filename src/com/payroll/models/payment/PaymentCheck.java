@@ -1,4 +1,4 @@
-package com.payroll.payment;
+package com.payroll.models.payment;
 
 import java.time.LocalDate;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.payroll.employee;
+package com.payroll.models.employee;
 
 import java.time.LocalDate;
 

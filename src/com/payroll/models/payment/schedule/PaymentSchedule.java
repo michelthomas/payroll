@@ -1,4 +1,4 @@
-package com.payroll.payment.schedule;
+package com.payroll.models.payment.schedule;
 
 import java.time.LocalDate;
 import java.util.List;

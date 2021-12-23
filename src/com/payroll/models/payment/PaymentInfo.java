@@ -1,7 +1,7 @@
-package com.payroll.payment;
+package com.payroll.models.payment;
 
-import com.payroll.payment.method.PaymentMethod;
-import com.payroll.payment.schedule.PaymentSchedule;
+import com.payroll.models.payment.method.PaymentMethod;
+import com.payroll.models.payment.schedule.PaymentSchedule;
 
 public class PaymentInfo {
 

@@ -1,4 +1,4 @@
-package com.payroll.payment.schedule;
+package com.payroll.models.payment.schedule;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

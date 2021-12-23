@@ -1,10 +1,10 @@
-package com.payroll.payment.method;
+package com.payroll.models.payment.method;
 
-public class Deposit implements PaymentMethod {
+public class BankCheckMail implements PaymentMethod {
 
     @Override
     public String getDescription() {
-        return "Depósito em conta bancária.";
+        return "Cheque pelos correios.";
     }
 
     @Override

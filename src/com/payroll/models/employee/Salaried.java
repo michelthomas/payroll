@@ -1,8 +1,7 @@
-package com.payroll.employee;
+package com.payroll.models.employee;
 
 import com.payroll.DB;
-import com.payroll.payment.PaymentInfo;
-import com.payroll.payment.method.Deposit;
+import com.payroll.models.payment.PaymentInfo;
 
 import java.util.UUID;
 

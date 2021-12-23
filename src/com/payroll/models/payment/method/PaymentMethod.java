@@ -1,4 +1,4 @@
-package com.payroll.payment.method;
+package com.payroll.models.payment.method;
 
 public interface PaymentMethod {
 

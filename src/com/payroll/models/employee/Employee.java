@@ -1,7 +1,7 @@
-package com.payroll.employee;
+package com.payroll.models.employee;
 
-import com.payroll.payment.PaymentCheck;
-import com.payroll.payment.PaymentInfo;
+import com.payroll.models.payment.PaymentCheck;
+import com.payroll.models.payment.PaymentInfo;
 
 import java.util.Comparator;
 import java.util.List;

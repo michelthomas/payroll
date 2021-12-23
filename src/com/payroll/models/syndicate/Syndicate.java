@@ -1,4 +1,4 @@
-package com.payroll.syndicate;
+package com.payroll.models.syndicate;
 
 import java.util.List;
 

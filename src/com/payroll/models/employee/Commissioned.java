@@ -1,7 +1,7 @@
-package com.payroll.employee;
+package com.payroll.models.employee;
 
 import com.payroll.DB;
-import com.payroll.payment.PaymentInfo;
+import com.payroll.models.payment.PaymentInfo;
 
 import java.time.LocalDate;
 import java.util.List;

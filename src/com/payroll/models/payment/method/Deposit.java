@@ -1,10 +1,10 @@
-package com.payroll.payment.method;
+package com.payroll.models.payment.method;
 
-public class BankCheckHand implements PaymentMethod {
+public class Deposit implements PaymentMethod {
 
     @Override
     public String getDescription() {
-        return "Cheque em mãos.";
+        return "Depósito em conta bancária.";
     }
 
     @Override
