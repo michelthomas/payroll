@@ -1,5 +1,7 @@
 package com.payroll.employee;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +31,7 @@ public class Hourly extends Employee {
     @Override
     public Double calculateGrossSalary() {
         return this.getTimeCards().stream().mapToDouble(timeCard -> {
-            Double dailySalary =  timeCard.getDailyHours() > 8 ?
+            Double dailySalary = timeCard.getDailyHours() > 8 ?
                     (timeCard.getDailyHours() - 8) * this.hourlySalary * 1.5 + 8 * this.hourlySalary
                     : timeCard.getDailyHours() * this.hourlySalary;
             System.out.println(dailySalary);
@@ -39,6 +41,13 @@ public class Hourly extends Employee {
 
     public List<TimeCard> getTimeCards() {
         return timeCards;
+    }
+
+    public List<TimeCard> getTimeCardsByDate(LocalDate begin, LocalDate end) {
+        return timeCards.stream().filter(timeCard -> {
+            return (timeCard.getDate().isAfter(begin) || timeCard.getDate().isEqual(begin))
+                    && (timeCard.getDate().isBefore(end) || timeCard.getDate().isEqual(end));
+        }).toList();
     }
 
     public void setTimeCards(List<TimeCard> timeCards) {

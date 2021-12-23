@@ -1,22 +1,22 @@
 package com.payroll.employee;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class SaleResult {
 
-    private Date date;
+    private LocalDate date;
     private double value;
 
-    public SaleResult(Date date, double value) {
+    public SaleResult(LocalDate date, double value) {
         this.date = date;
         this.value = value;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -1,5 +1,6 @@
 package com.payroll.employee;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +40,13 @@ public class Commissioned extends Employee {
 
     public List<SaleResult> getSalesResults() {
         return salesResults;
+    }
+
+    public List<SaleResult> getSalesResultsByDate(LocalDate begin, LocalDate end) {
+        return salesResults.stream().filter(saleResult -> {
+            return (saleResult.getDate().isAfter(begin) || saleResult.getDate().isEqual(begin))
+                    && (saleResult.getDate().isBefore(end) || saleResult.getDate().isEqual(end));
+        }).toList();
     }
 
     public void setSalesResults(List<SaleResult> salesResults) {
