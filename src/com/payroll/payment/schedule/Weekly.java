@@ -2,9 +2,11 @@ package com.payroll.payment.schedule;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Weekly implements PaymentSchedule {
 
@@ -48,5 +50,12 @@ public class Weekly implements PaymentSchedule {
             paydaysList.add(firstDay * i);
         }
         return paydaysList;
+    }
+
+    @Override
+    public String toString() {
+        // TODO Change to pt-br
+        return timesInTheMonth + " vezes no mês, em um dia de " +
+                dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "\n";
     }
 }

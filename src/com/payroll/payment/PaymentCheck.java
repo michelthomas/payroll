@@ -41,4 +41,15 @@ public class PaymentCheck {
     public Double getNetSalary() {
         return netSalary;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentCheck{" +
+                "id=" + id +
+                ", grossSalary=" + grossSalary +
+                ", syndicateDiscounts=" + syndicateDiscounts +
+                ", netSalary=" + netSalary +
+                ", date=" + date +
+                "}\n";
+    }
 }

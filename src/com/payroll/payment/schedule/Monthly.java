@@ -29,4 +29,9 @@ public class Monthly implements PaymentSchedule {
     public List<Integer> getPaydaysInTheMonthByDate(LocalDate date) {
         return new ArrayList<>(day);
     }
+
+    @Override
+    public String toString() {
+        return "Mensalmente, no dia " + day + "\n";
+    }
 }

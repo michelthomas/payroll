@@ -26,4 +26,9 @@ public class LastWorkingDayOfTheMonth implements PaymentSchedule {
 
         return new ArrayList<>(lastDayOfMonth);
     }
+
+    @Override
+    public String toString() {
+        return "Último dia útil do mês\n";
+    }
 }

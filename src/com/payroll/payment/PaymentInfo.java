@@ -28,4 +28,12 @@ public class PaymentInfo {
     public void setMethod(PaymentMethod method) {
         this.method = method;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentInfo{" +
+                "schedule=" + schedule +
+                ", method=" + method +
+                "}\n";
+    }
 }

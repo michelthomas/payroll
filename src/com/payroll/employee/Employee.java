@@ -89,7 +89,8 @@ public abstract class Employee {
                 ", documentNumber='" + documentNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", paymentInfo=" + paymentInfo +
+                ", \npaymentInfo=" + paymentInfo +
+                ", paymentChecks=" + paymentChecks +
                 "}\n";
     }
 }
