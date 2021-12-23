@@ -23,4 +23,9 @@ public class Salaried extends Employee {
     public void setMonthlySalary(Double monthlySalary) {
         this.monthlySalary = monthlySalary;
     }
+
+    @Override
+    public Double calculateGrossSalary() {
+        return this.monthlySalary;
+    }
 }

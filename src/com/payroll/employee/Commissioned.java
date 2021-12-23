@@ -1,11 +1,13 @@
 package com.payroll.employee;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Commissioned extends Employee {
 
     private Double baseSalary;
     private Double percentage;
+    private List<SaleResult> salesResults;
 
     public Commissioned(String documentNumber, String name, String address, Double baseSalary, Double percentage) {
         super(documentNumber, name, address);
@@ -33,5 +35,28 @@ public class Commissioned extends Employee {
 
     public void setPercentage(Double percentage) {
         this.percentage = percentage;
+    }
+
+    public List<SaleResult> getSalesResults() {
+        return salesResults;
+    }
+
+    public void setSalesResults(List<SaleResult> salesResults) {
+        this.salesResults = salesResults;
+    }
+
+    @Override
+    public Double calculateGrossSalary() {
+        Double sumSalesResults = this.getSalesResults().stream().mapToDouble(SaleResult::getValue).sum();
+        return this.baseSalary + (sumSalesResults * this.percentage);
+    }
+
+    @Override
+    public String toString() {
+        return "Commissioned{\n" +
+                "\tbaseSalary=" + baseSalary +
+                ", percentage=" + percentage +
+                ", salesResults=\n\t" + salesResults +
+                '}';
     }
 }

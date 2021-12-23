@@ -50,4 +50,6 @@ public abstract class Employee {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public abstract Double calculateGrossSalary();
 }
