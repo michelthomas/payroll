@@ -34,7 +34,6 @@ public class Hourly extends Employee {
             Double dailySalary = timeCard.getDailyHours() > 8 ?
                     (timeCard.getDailyHours() - 8) * this.hourlySalary * 1.5 + 8 * this.hourlySalary
                     : timeCard.getDailyHours() * this.hourlySalary;
-            System.out.println(dailySalary);
             return dailySalary;
         }).sum();
     }
@@ -57,8 +56,9 @@ public class Hourly extends Employee {
     @Override
     public String toString() {
         return "Hourly{" +
+                super.toString() +
                 "hourlySalary=" + hourlySalary +
                 ", timeCards=" + timeCards +
-                '}';
+                "}\n";
     }
 }

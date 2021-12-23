@@ -28,4 +28,12 @@ public class Salaried extends Employee {
     public Double calculateGrossSalary() {
         return this.monthlySalary;
     }
+
+    @Override
+    public String toString() {
+        return "Salaried{" +
+                super.toString() +
+                "monthlySalary=" + monthlySalary +
+                "}\n";
+    }
 }
