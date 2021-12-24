@@ -19,6 +19,7 @@ public class Menu {
         System.out.println("4. Lançar um resultado de venda");
         System.out.println("5. Lançar uma taxa de serviço");
         System.out.println("6. Alterar detalhes de um empregado");
+        System.out.println("7. Rodar a folha de pagamento para hoje");
         System.out.println("99. Sair");
 
         int choice = Integer.parseInt(scanner.nextLine());
@@ -40,12 +41,16 @@ public class Menu {
                 EmployeeView.registerSalesResult();
                 break;
             case 5:
-
+                EmployeeView.registerAdditionalServiceFee();
                 break;
             case 6:
                 EditEmployeeView.menu();
+                break;
+            case 7:
+                EditEmployeeView.runPayroll();
+                break;
             case 99:
-                return;
+                break;
             default:
                 System.out.println("Opção inválida!");
                 show();

@@ -3,6 +3,7 @@ package com.payroll.views;
 import com.payroll.Main;
 import com.payroll.Menu;
 import com.payroll.controllers.EmployeesController;
+import com.payroll.controllers.SyndicatesController;
 import com.payroll.models.employee.Employee;
 
 import java.text.ParseException;
@@ -15,6 +16,7 @@ public class EmployeeView {
 
     public static Scanner scanner = new Scanner(System.in);
     public static EmployeesController employeesController = new EmployeesController();
+    public static SyndicatesController syndicatesController = new SyndicatesController();
 
     public static void listEmployees() throws ParseException {
 
@@ -149,6 +151,38 @@ public class EmployeeView {
         data.put("value", scanner.nextLine());
 
         employeesController.registerSalesResult(employeeList.get(Integer.parseInt(n)), data);
+
+        System.out.println("---------------------------");
+
+        Menu.show();
+    }
+
+    public static void registerAdditionalServiceFee() throws ParseException {
+        Map<String, String> data = new HashMap<>();
+
+        List<Employee> employeeList = employeesController.index();
+
+        System.out.println("Lista de Empregados:");
+
+        int i = 0;
+        for (Employee employee : employeeList) {
+            System.out.println("[" + i + "] - " + employee.getName() + " - " + employee.getId());
+            i++;
+        }
+
+        System.out.println("\nSelecione o empregado para lançar uma taxa de serviço:");
+        String n = scanner.nextLine();
+
+        System.out.println("Descrição: ");
+        String description = scanner.nextLine();
+
+        System.out.println("Valor: ");
+        Double fee = Double.valueOf(scanner.nextLine());
+
+        System.out.println("Data: ");
+        String date = scanner.nextLine();
+
+        syndicatesController.registerAdditionalServiceFee(employeeList.get(Integer.parseInt(n)).getDocumentNumber(), description, fee, date);
 
         System.out.println("---------------------------");
 

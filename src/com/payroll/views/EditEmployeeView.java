@@ -3,11 +3,13 @@ package com.payroll.views;
 import com.payroll.Menu;
 import com.payroll.controllers.EmployeesController;
 import com.payroll.controllers.PaymentsController;
+import com.payroll.controllers.SyndicatesController;
 import com.payroll.models.employee.Commissioned;
 import com.payroll.models.employee.Employee;
 import com.payroll.models.employee.Hourly;
 import com.payroll.models.employee.Salaried;
 import com.payroll.models.payment.method.PaymentMethod;
+import com.payroll.models.syndicate.Affiliate;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ public class EditEmployeeView {
     public static Scanner scanner = new Scanner(System.in);
     public static EmployeesController employeesController = new EmployeesController();
     public static PaymentsController paymentsController = new PaymentsController();
+    public static SyndicatesController syndicatesController = new SyndicatesController();
 
     public static void menu() throws ParseException {
         System.out.println("0. Alterar nome");
@@ -31,7 +34,8 @@ public class EditEmployeeView {
         System.out.println("5. Dessindicalizar-se");
         System.out.println("6. Alterar id no sindicato(?!)");
         System.out.println("7. Alterar taxa sindical");
-        System.out.println("8. Voltar");
+        System.out.println("8. Listar sindicalizados");
+        System.out.println("9. Voltar");
 
 
         int choice = Integer.parseInt(scanner.nextLine());
@@ -45,12 +49,25 @@ public class EditEmployeeView {
             case 5 -> EditEmployeeView.leaveSyndicate();
             case 6 -> EditEmployeeView.editEmployeeSyndicateId();
             case 7 -> EditEmployeeView.editSyndicateMonthlyFee();
-            case 8 -> Menu.show();
+            case 8 -> EditEmployeeView.listAffiliates();
+            case 9 -> Menu.show();
             default -> {
                 System.out.println("Opção inválida!");
                 menu();
             }
         }
+        System.out.println("---------------------------");
+
+        menu();
+    }
+
+    private static void listAffiliates() throws ParseException {
+        List<Affiliate> employeeList = syndicatesController.getAllAffiliates();
+
+        System.out.println("Lista de Sindicalizados:");
+
+        employeeList.forEach(System.out::println);
+
         System.out.println("---------------------------");
 
         menu();
@@ -211,11 +228,53 @@ public class EditEmployeeView {
         menu();
     }
 
-    private static void joinSyndicate() {
+    private static void joinSyndicate() throws ParseException {
+        List<Employee> employeeList = employeesController.index();
 
+        System.out.println("Lista de Empregados:");
+
+        int i = 0;
+        for (Employee employee : employeeList) {
+            System.out.println("[" + i + "] - " + employee.getName() + " - " + employee.getId());
+            i++;
+        }
+
+        System.out.println("\nSelecione o empregado para sindicalizar: ");
+        String n = scanner.nextLine();
+
+        Employee employee = employeeList.get(Integer.parseInt(n));
+
+        System.out.println("Digite a taxa mensal: ");
+        Double monthlyFee = Double.valueOf(scanner.nextLine());
+
+        syndicatesController.createAffiliate(employee.getDocumentNumber(), monthlyFee);
+
+        System.out.println("---------------------------");
+
+        menu();
     }
 
-    private static void leaveSyndicate() {
+    private static void leaveSyndicate() throws ParseException {
+        List<Employee> employeeList = employeesController.index();
+
+        System.out.println("Lista de Empregados:");
+
+        int i = 0;
+        for (Employee employee : employeeList) {
+            System.out.println("[" + i + "] - " + employee.getName() + " - " + employee.getId());
+            i++;
+        }
+
+        System.out.println("\nSelecione o empregado para dessindicalizar: ");
+        String n = scanner.nextLine();
+
+        Employee employee = employeeList.get(Integer.parseInt(n));
+
+        syndicatesController.removeAffiliate(employee.getDocumentNumber());
+
+        System.out.println("---------------------------");
+
+        menu();
     }
 
     // TODO Why change this?...
@@ -227,4 +286,7 @@ public class EditEmployeeView {
     }
 
 
+    public static void runPayroll() {
+        paymentsController.runPayroll();
+    }
 }

@@ -37,4 +37,13 @@ public class AdditionalServiceFee {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "AdditionalServiceFee{" +
+                "description='" + description + '\'' +
+                ", fee=" + fee +
+                ", date=" + date +
+                '}';
+    }
 }

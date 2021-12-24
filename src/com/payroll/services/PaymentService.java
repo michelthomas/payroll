@@ -70,6 +70,8 @@ public class PaymentService {
                 employee.getPaymentInfo().getSchedule().getPaydaysInTheMonth().contains(day)
         ).toList();
 
+
+
         employees.forEach(employee -> {
             List<PaymentCheck> paymentChecks = employee.getPaymentChecks();
 
