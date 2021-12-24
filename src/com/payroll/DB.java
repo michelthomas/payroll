@@ -1,19 +1,19 @@
 package com.payroll;
 
-import com.payroll.employee.Commissioned;
-import com.payroll.employee.Employee;
-import com.payroll.employee.Hourly;
-import com.payroll.employee.Salaried;
-import com.payroll.payment.PaymentInfo;
-import com.payroll.payment.method.BankCheckHand;
-import com.payroll.payment.method.BankCheckMail;
-import com.payroll.payment.method.Deposit;
-import com.payroll.payment.method.PaymentMethod;
-import com.payroll.payment.schedule.LastWorkingDayOfTheMonth;
-import com.payroll.payment.schedule.PaymentSchedule;
-import com.payroll.payment.schedule.Weekly;
-import com.payroll.syndicate.Affiliate;
-import com.payroll.syndicate.Syndicate;
+import com.payroll.models.employee.Commissioned;
+import com.payroll.models.employee.Employee;
+import com.payroll.models.employee.Hourly;
+import com.payroll.models.employee.Salaried;
+import com.payroll.models.payment.PaymentInfo;
+import com.payroll.models.payment.method.BankCheckHand;
+import com.payroll.models.payment.method.BankCheckMail;
+import com.payroll.models.payment.method.Deposit;
+import com.payroll.models.payment.method.PaymentMethod;
+import com.payroll.models.payment.schedule.LastWorkingDayOfTheMonth;
+import com.payroll.models.payment.schedule.PaymentSchedule;
+import com.payroll.models.payment.schedule.Weekly;
+import com.payroll.models.syndicate.Affiliate;
+import com.payroll.models.syndicate.Syndicate;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
