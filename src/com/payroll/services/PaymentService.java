@@ -7,6 +7,7 @@ import com.payroll.models.syndicate.Affiliate;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentService {
@@ -24,23 +25,31 @@ public class PaymentService {
 
         Affiliate affiliate = this.db.syndicate.getAffiliateByDocumentNumber(employee.getDocumentNumber());
 
+        if (affiliate == null) {
+            return 0.0;
+        }
+
         // TODO Rename these
         Month month = LocalDate.now().getMonth();
         int year = LocalDate.now().getYear();
         int lastPayday = 1;
 
-        LocalDate lastPaymentCheckDate = employee.getLastPaymentCheck().getDate();
+        PaymentCheck lastPaymentCheck = employee.getLastPaymentCheck();
 
-        if (lastPaymentCheckDate != null) {
+        if (lastPaymentCheck != null) {
+            LocalDate lastPaymentCheckDate = lastPaymentCheck.getDate();
 
-            lastPayday = lastPaymentCheckDate.getDayOfMonth();
+            if (lastPaymentCheckDate != null) {
 
-            if (lastPaymentCheckDate.getMonth() != LocalDate.now().getMonth()) {
-                month = lastPaymentCheckDate.getMonth();
-            }
+                lastPayday = lastPaymentCheckDate.getDayOfMonth();
 
-            if (lastPaymentCheckDate.getYear() != LocalDate.now().getYear()) {
-                year = lastPaymentCheckDate.getYear();
+                if (lastPaymentCheckDate.getMonth() != LocalDate.now().getMonth()) {
+                    month = lastPaymentCheckDate.getMonth();
+                }
+
+                if (lastPaymentCheckDate.getYear() != LocalDate.now().getYear()) {
+                    year = lastPaymentCheckDate.getYear();
+                }
             }
         }
 
@@ -71,13 +80,18 @@ public class PaymentService {
         ).toList();
 
 
-
         employees.forEach(employee -> {
             List<PaymentCheck> paymentChecks = employee.getPaymentChecks();
+
+            if (paymentChecks == null) {
+                paymentChecks = new ArrayList<>();
+            }
 
             PaymentCheck paymentCheck = this.generatePaymentCheck(employee, day);
 
             paymentChecks.add(paymentCheck);
+
+            employee.setPaymentChecks(paymentChecks);
 
             this.pay(employee, paymentCheck);
         });
