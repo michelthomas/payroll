@@ -287,6 +287,11 @@ public class EditEmployeeView {
 
 
     public static void runPayroll() {
+        employeesController.index().forEach(employee -> {
+            List<Integer> paydaysInTheMonth = employee.getPaymentInfo().getSchedule().getPaydaysInTheMonth();
+            System.out.println(employee.getPaymentInfo().getSchedule() + " --- " + paydaysInTheMonth);
+        });
         paymentsController.runPayroll();
+
     }
 }
