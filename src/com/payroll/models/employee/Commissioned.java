@@ -60,6 +60,9 @@ public class Commissioned extends Employee {
 
     @Override
     public Double calculateGrossSalary() {
+        if (this.getSalesResults() == null) {
+            return baseSalary;
+        }
         Double sumSalesResults = this.getSalesResults().stream().mapToDouble(SaleResult::getValue).sum();
         return this.baseSalary + (sumSalesResults * (this.percentage / 100));
     }

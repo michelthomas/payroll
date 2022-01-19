@@ -34,6 +34,9 @@ public class Hourly extends Employee {
 
     @Override
     public Double calculateGrossSalary() {
+        if (this.getTimeCards() == null) {
+            return 0.0;
+        }
         return this.getTimeCards().stream().mapToDouble(timeCard -> {
             Double dailySalary = timeCard.getDailyHours() > 8 ?
                     (timeCard.getDailyHours() - 8) * this.hourlySalary * 1.5 + 8 * this.hourlySalary

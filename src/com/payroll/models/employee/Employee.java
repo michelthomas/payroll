@@ -77,6 +77,9 @@ public abstract class Employee {
     }
 
     public PaymentCheck getLastPaymentCheck() {
+        if (this.paymentChecks == null) {
+            return null;
+        }
         return this.paymentChecks.stream()
                 .max(Comparator.comparing(PaymentCheck::getDate))
                 .orElse(null);
