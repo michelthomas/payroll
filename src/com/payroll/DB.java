@@ -1,9 +1,6 @@
 package com.payroll;
 
-import com.payroll.models.employee.Commissioned;
-import com.payroll.models.employee.Employee;
-import com.payroll.models.employee.Hourly;
-import com.payroll.models.employee.Salaried;
+import com.payroll.models.employee.*;
 import com.payroll.models.payment.PaymentInfo;
 import com.payroll.models.payment.method.BankCheckHand;
 import com.payroll.models.payment.method.BankCheckMail;
@@ -16,6 +13,8 @@ import com.payroll.models.syndicate.Affiliate;
 import com.payroll.models.syndicate.Syndicate;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +61,14 @@ public class DB {
         employees[0].getPaymentInfo().setMethod(this.paymentMethods.get("deposito"));
         employees[1].getPaymentInfo().setMethod(this.paymentMethods.get("cheque-correios"));
         employees[2].getPaymentInfo().setMethod(this.paymentMethods.get("cheque-maos"));
+
+
+        List<TimeCard> timeCardList = new ArrayList<>();
+        timeCardList.add(new TimeCard(LocalDate.of(2021, Month.NOVEMBER, 5), 8));
+        timeCardList.add(new TimeCard(LocalDate.of(2021, Month.NOVEMBER, 6), 9));
+        timeCardList.add(new TimeCard(LocalDate.of(2021, Month.DECEMBER, 8), 10));
+
+        ((Hourly) employees[2]).setTimeCards(timeCardList);
 
         for (Employee employee : employees) {
             this.employees.put(employee.getId(), employee);
