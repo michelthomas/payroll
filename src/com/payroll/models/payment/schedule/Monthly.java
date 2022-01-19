@@ -22,12 +22,14 @@ public class Monthly implements PaymentSchedule {
 
     @Override
     public List<Integer> getPaydaysInTheMonth() {
-        return new ArrayList<>(day);
+        ArrayList<Integer> paydays = new ArrayList<>();
+        paydays.add(day);
+        return paydays;
     }
 
     @Override
     public List<Integer> getPaydaysInTheMonthByDate(LocalDate date) {
-        return new ArrayList<>(day);
+        return this.getPaydaysInTheMonth();
     }
 
     @Override

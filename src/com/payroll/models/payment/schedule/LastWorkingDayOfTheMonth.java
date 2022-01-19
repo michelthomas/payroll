@@ -24,7 +24,10 @@ public class LastWorkingDayOfTheMonth implements PaymentSchedule {
             case SATURDAY -> lastDayOfMonth -= 1;
         }
 
-        return new ArrayList<>(lastDayOfMonth);
+        ArrayList<Integer> paydays = new ArrayList<>();
+        paydays.add(lastDayOfMonth);
+
+        return paydays;
     }
 
     @Override
