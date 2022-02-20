@@ -144,7 +144,7 @@ public class EmployeesController {
                 return;
         }
 
-        this.db.employees.put(employee.getId(), employee);
+        this.db.employees.put(employeeUpdated.getId(), employeeUpdated);
     }
 
     public List<Employee> getHourlyEmployees() {
