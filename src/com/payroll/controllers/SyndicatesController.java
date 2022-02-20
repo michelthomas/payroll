@@ -1,6 +1,7 @@
 package com.payroll.controllers;
 
 import com.payroll.DB;
+import com.payroll.exceptions.EmployeeDoesNotBelongToTheSyndicateException;
 import com.payroll.models.syndicate.AdditionalServiceFee;
 import com.payroll.models.syndicate.Affiliate;
 import com.payroll.models.syndicate.Syndicate;
@@ -60,6 +61,17 @@ public class SyndicatesController {
                 list.add(serviceFee);
                 affiliate.setAdditionalServiceFees(list);
             }
+        }
+    }
+
+    public void editAffiliateMonthlyFee(String documentNumber, Double newMonthlyFee) throws EmployeeDoesNotBelongToTheSyndicateException {
+
+        Affiliate affiliate = this.getAffiliateByDocumentNumber(documentNumber);
+
+        if (affiliate != null) {
+            affiliate.setMonthlyFee(newMonthlyFee);
+        } else {
+            throw new EmployeeDoesNotBelongToTheSyndicateException();
         }
     }
 }

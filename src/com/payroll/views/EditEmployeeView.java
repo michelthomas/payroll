@@ -4,6 +4,7 @@ import com.payroll.Menu;
 import com.payroll.controllers.EmployeesController;
 import com.payroll.controllers.PaymentsController;
 import com.payroll.controllers.SyndicatesController;
+import com.payroll.exceptions.EmployeeDoesNotBelongToTheSyndicateException;
 import com.payroll.models.employee.Commissioned;
 import com.payroll.models.employee.Employee;
 import com.payroll.models.employee.Hourly;
@@ -281,11 +282,40 @@ public class EditEmployeeView {
     private static void editEmployeeSyndicateId() {
     }
 
-    private static void editSyndicateMonthlyFee() {
+    private static void editSyndicateMonthlyFee() throws ParseException {
+        List<Employee> employeeList = employeesController.index();
 
+        System.out.println("Lista de Empregados:");
+
+        int i = 0;
+        for (Employee employee : employeeList) {
+            System.out.println("[" + i + "] - " + employee.getName() + " - " + employee.getId());
+            i++;
+        }
+
+        System.out.println("\nSelecione o empregado para editar sua taxa sindical: ");
+        String n = scanner.nextLine();
+
+        Employee employee = employeeList.get(Integer.parseInt(n));
+
+
+        System.out.println("Digite a taxa mensal: ");
+        Double newMonthlyFee = Double.valueOf(scanner.nextLine());
+
+
+        try {
+            syndicatesController.editAffiliateMonthlyFee(employee.getDocumentNumber(), newMonthlyFee);
+        } catch (EmployeeDoesNotBelongToTheSyndicateException e) {
+            System.out.println("Não foi possível editar a taxa sindical: " + e.getMessage());
+        }
+
+        System.out.println("---------------------------");
+
+        menu();
     }
 
 
+    // TODO Move to other view
     public static void runPayroll() {
         employeesController.index().forEach(employee -> {
             List<Integer> paydaysInTheMonth = employee.getPaymentInfo().getSchedule().getPaydaysInTheMonth();
