@@ -55,7 +55,7 @@ public class Affiliate {
         }
 
         return this.additionalServiceFees.stream().filter(additionalServiceFee -> {
-            return (additionalServiceFee.getDate().isAfter(begin) || additionalServiceFee.getDate().isEqual(begin))
+            return (additionalServiceFee.getDate().isAfter(begin))
                     && (additionalServiceFee.getDate().isBefore(end) || additionalServiceFee.getDate().isEqual(end));
         }).mapToDouble(AdditionalServiceFee::getFee).sum();
     }

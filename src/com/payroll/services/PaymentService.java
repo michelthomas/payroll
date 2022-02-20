@@ -15,9 +15,11 @@ public class PaymentService {
     private final DB db = DB.getInstance();
 
     private void pay(Employee employee, PaymentCheck check) {
-        System.out.println("Pagamento Realizado!\nEmpregado: " + employee.getName() +
+        System.out.println("**********\n" +
+                "Pagamento Realizado!\nEmpregado: " + employee.getName() +
                 "\nValor: " + check.getNetSalary() +
-                "\nMétodo: " + employee.getPaymentInfo().getMethod().getDescription()
+                "\nMétodo: " + employee.getPaymentInfo().getMethod().getDescription() +
+                "\n**********\n"
         );
     }
 
@@ -33,6 +35,8 @@ public class PaymentService {
         Month month = LocalDate.now().getMonth();
         int year = LocalDate.now().getYear();
         int lastPayday = 1;
+
+        LocalDate begin;
 
         PaymentCheck lastPaymentCheck = employee.getLastPaymentCheck();
 
@@ -51,9 +55,15 @@ public class PaymentService {
                     year = lastPaymentCheckDate.getYear();
                 }
             }
+
+            begin = LocalDate.of(year, month, lastPayday);
+
+        } else {
+
+            // If there are no paychecks, decrease one day to count from the first of the month
+            begin = LocalDate.of(year, month, lastPayday).minusDays(1);
         }
 
-        LocalDate begin = LocalDate.of(year, month, 1);
         LocalDate end = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), payday);
 
         Double additionalFeesValue = affiliate.calculateAdditionalFeeByDatePeriod(begin, end);
