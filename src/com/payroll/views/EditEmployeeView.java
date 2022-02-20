@@ -316,12 +316,19 @@ public class EditEmployeeView {
 
 
     // TODO Move to other view
-    public static void runPayroll() {
+    public static void runPayroll() throws ParseException {
         employeesController.index().forEach(employee -> {
             List<Integer> paydaysInTheMonth = employee.getPaymentInfo().getSchedule().getPaydaysInTheMonth();
-            System.out.println(employee.getPaymentInfo().getSchedule() + " --- " + paydaysInTheMonth);
+            System.out.println(employee.getName() + " - "  + employee.getPaymentInfo().getSchedule() + " --- " + paydaysInTheMonth);
         });
-        paymentsController.runPayroll();
 
+        System.out.println("\nDigite o dia: ");
+        int day = Integer.parseInt(scanner.nextLine());
+
+        paymentsController.runPayroll(day);
+
+        System.out.println("---------------------------");
+
+        menu();
     }
 }

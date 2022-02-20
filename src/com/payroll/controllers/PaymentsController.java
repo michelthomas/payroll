@@ -20,8 +20,8 @@ public class PaymentsController {
         return this.db.paymentMethods.values().stream().toList();
     }
 
-    public void runPayroll() {
-        paymentService.payEmployeesByDay(LocalDate.now().getDayOfMonth());
+    public void runPayroll(int day) {
+        paymentService.payEmployeesByDay(day);
     }
 
 }
