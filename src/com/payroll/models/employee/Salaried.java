@@ -35,9 +35,9 @@ public class Salaried extends Employee {
 
     @Override
     public String toString() {
-        return "\nSalaried{" +
+        return "\nSalaried{\n\t" +
                 super.toString() +
-                "monthlySalary=" + monthlySalary +
-                "}\n";
+                "\tmonthlySalary=" + monthlySalary +
+                "\n}\n";
     }
 }

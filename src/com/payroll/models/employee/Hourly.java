@@ -62,10 +62,10 @@ public class Hourly extends Employee {
 
     @Override
     public String toString() {
-        return "\nHourly{" +
+        return "\nHourly{\n\t" +
                 super.toString() +
-                "hourlySalary=" + hourlySalary +
+                "\thourlySalary=" + hourlySalary +
                 ", timeCards=" + timeCards +
-                "}\n";
+                "\n}\n";
     }
 }

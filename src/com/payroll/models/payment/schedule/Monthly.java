@@ -34,6 +34,6 @@ public class Monthly implements PaymentSchedule {
 
     @Override
     public String toString() {
-        return "Mensalmente, no dia " + day + "\n";
+        return "Mensalmente, no dia " + day;
     }
 }

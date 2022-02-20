@@ -69,11 +69,11 @@ public class Commissioned extends Employee {
 
     @Override
     public String toString() {
-        return "\nCommissioned{" +
+        return "\nCommissioned{\n\t" +
                 super.toString() +
-                "baseSalary=" + baseSalary +
+                "\tbaseSalary=" + baseSalary +
                 ", percentage=" + percentage +
                 ", salesResults=" + salesResults +
-                "}\n";
+                "\n}\n";
     }
 }

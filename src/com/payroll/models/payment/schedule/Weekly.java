@@ -56,6 +56,6 @@ public class Weekly implements PaymentSchedule {
     public String toString() {
         // TODO Change to pt-br
         return timesInTheMonth + " vezes no mês, em um dia de " +
-                dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "\n";
+                dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
     }
 }

@@ -31,9 +31,9 @@ public class PaymentInfo {
 
     @Override
     public String toString() {
-        return "PaymentInfo{" +
+        return "PaymentInfo{\n\t\t\t" +
                 "schedule=" + schedule +
                 ", method=" + method +
-                "}\n";
+                "\n\t\t}";
     }
 }

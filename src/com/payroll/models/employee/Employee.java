@@ -87,12 +87,12 @@ public abstract class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Employee{\n\t\t" +
                 "id=" + id +
                 ", documentNumber='" + documentNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", \npaymentInfo=" + paymentInfo +
+                ", paymentInfo=" + paymentInfo +
                 ", paymentChecks=" + paymentChecks +
                 "}\n";
     }
