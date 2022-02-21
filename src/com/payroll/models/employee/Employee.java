@@ -58,7 +58,7 @@ public abstract class Employee {
         this.address = address;
     }
 
-    public abstract Double calculateGrossSalary();
+    public abstract Double calculateGrossSalary(int payday);
 
     public PaymentInfo getPaymentInfo() {
         return this.paymentInfo;

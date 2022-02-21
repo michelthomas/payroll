@@ -78,7 +78,7 @@ public class PaymentService {
     private PaymentCheck generatePaymentCheck(Employee employee, int day) {
 
         return new PaymentCheck(
-                employee.calculateGrossSalary(),
+                employee.calculateGrossSalary(day),
                 this.calculateSyndicateDiscounts(employee, day),
                 LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day)
         );

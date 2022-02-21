@@ -1,9 +1,11 @@
 package com.payroll.models.employee;
 
 import com.payroll.DB;
+import com.payroll.models.payment.PaymentCheck;
 import com.payroll.models.payment.PaymentInfo;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,7 +51,7 @@ public class Commissioned extends Employee {
 
     public List<SaleResult> getSalesResultsByDate(LocalDate begin, LocalDate end) {
         return salesResults.stream().filter(saleResult -> {
-            return (saleResult.getDate().isAfter(begin) || saleResult.getDate().isEqual(begin))
+            return (saleResult.getDate().isAfter(begin))
                     && (saleResult.getDate().isBefore(end) || saleResult.getDate().isEqual(end));
         }).toList();
     }
@@ -59,11 +61,48 @@ public class Commissioned extends Employee {
     }
 
     @Override
-    public Double calculateGrossSalary() {
+    public Double calculateGrossSalary(int payday) {
         if (this.getSalesResults() == null) {
             return baseSalary;
         }
-        Double sumSalesResults = this.getSalesResults().stream().mapToDouble(SaleResult::getValue).sum();
+
+        Month month = LocalDate.now().getMonth();
+        int year = LocalDate.now().getYear();
+        int lastPayday = 1;
+
+        LocalDate begin;
+
+        PaymentCheck lastPaymentCheck = this.getLastPaymentCheck();
+
+        if (lastPaymentCheck != null) {
+            LocalDate lastPaymentCheckDate = lastPaymentCheck.getDate();
+
+            if (lastPaymentCheckDate != null) {
+
+                lastPayday = lastPaymentCheckDate.getDayOfMonth();
+
+                if (lastPaymentCheckDate.getMonth() != LocalDate.now().getMonth()) {
+                    month = lastPaymentCheckDate.getMonth();
+                }
+
+                if (lastPaymentCheckDate.getYear() != LocalDate.now().getYear()) {
+                    year = lastPaymentCheckDate.getYear();
+                }
+            }
+
+            begin = LocalDate.of(year, month, lastPayday);
+
+        } else {
+
+            // If there are no paychecks, decrease one day to count from the first of the month
+            begin = LocalDate.of(year, month, lastPayday).minusDays(1);
+        }
+
+        LocalDate end = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), payday);
+
+
+        Double sumSalesResults = this.getSalesResultsByDate(begin, end).stream().mapToDouble(SaleResult::getValue).sum();
+
         return this.baseSalary + (sumSalesResults * (this.percentage / 100));
     }
 

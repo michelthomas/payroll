@@ -1,9 +1,11 @@
 package com.payroll.models.employee;
 
 import com.payroll.DB;
+import com.payroll.models.payment.PaymentCheck;
 import com.payroll.models.payment.PaymentInfo;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,11 +35,46 @@ public class Hourly extends Employee {
     }
 
     @Override
-    public Double calculateGrossSalary() {
+    public Double calculateGrossSalary(int payday) {
         if (this.getTimeCards() == null) {
             return 0.0;
         }
-        return this.getTimeCards().stream().mapToDouble(timeCard -> {
+
+        Month month = LocalDate.now().getMonth();
+        int year = LocalDate.now().getYear();
+        int lastPayday = 1;
+
+        LocalDate begin;
+
+        PaymentCheck lastPaymentCheck = this.getLastPaymentCheck();
+
+        if (lastPaymentCheck != null) {
+            LocalDate lastPaymentCheckDate = lastPaymentCheck.getDate();
+
+            if (lastPaymentCheckDate != null) {
+
+                lastPayday = lastPaymentCheckDate.getDayOfMonth();
+
+                if (lastPaymentCheckDate.getMonth() != LocalDate.now().getMonth()) {
+                    month = lastPaymentCheckDate.getMonth();
+                }
+
+                if (lastPaymentCheckDate.getYear() != LocalDate.now().getYear()) {
+                    year = lastPaymentCheckDate.getYear();
+                }
+            }
+
+            begin = LocalDate.of(year, month, lastPayday);
+
+        } else {
+
+            // If there are no paychecks, decrease one day to count from the first of the month
+            begin = LocalDate.of(year, month, lastPayday).minusDays(1);
+        }
+
+        LocalDate end = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), payday);
+
+        return this.getTimeCardsByDate(begin, end).stream().mapToDouble(timeCard -> {
             Double dailySalary = timeCard.getDailyHours() > 8 ?
                     (timeCard.getDailyHours() - 8) * this.hourlySalary * 1.5 + 8 * this.hourlySalary
                     : timeCard.getDailyHours() * this.hourlySalary;
@@ -51,7 +88,7 @@ public class Hourly extends Employee {
 
     public List<TimeCard> getTimeCardsByDate(LocalDate begin, LocalDate end) {
         return timeCards.stream().filter(timeCard -> {
-            return (timeCard.getDate().isAfter(begin) || timeCard.getDate().isEqual(begin))
+            return (timeCard.getDate().isAfter(begin))
                     && (timeCard.getDate().isBefore(end) || timeCard.getDate().isEqual(end));
         }).toList();
     }

@@ -29,7 +29,7 @@ public class Salaried extends Employee {
     }
 
     @Override
-    public Double calculateGrossSalary() {
+    public Double calculateGrossSalary(int payday) {
         return this.monthlySalary;
     }
 
