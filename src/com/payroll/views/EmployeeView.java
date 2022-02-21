@@ -4,6 +4,7 @@ import com.payroll.Main;
 import com.payroll.Menu;
 import com.payroll.controllers.EmployeesController;
 import com.payroll.controllers.SyndicatesController;
+import com.payroll.exceptions.EmployeeDoesNotBelongToTheSyndicateException;
 import com.payroll.models.employee.Employee;
 
 import java.text.ParseException;
@@ -182,7 +183,11 @@ public class EmployeeView {
         System.out.println("Data: ");
         String date = scanner.nextLine();
 
-        syndicatesController.registerAdditionalServiceFee(employeeList.get(Integer.parseInt(n)).getDocumentNumber(), description, fee, date);
+        try {
+            syndicatesController.registerAdditionalServiceFee(employeeList.get(Integer.parseInt(n)).getDocumentNumber(), description, fee, date);
+        } catch (EmployeeDoesNotBelongToTheSyndicateException e) {
+            System.out.println("Não foi possível lançar a taxa de serviço: " + e.getMessage());
+        }
 
         System.out.println("---------------------------");
 

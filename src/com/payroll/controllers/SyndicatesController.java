@@ -47,7 +47,7 @@ public class SyndicatesController {
         );
     }
 
-    public void registerAdditionalServiceFee(String documentNumber, String description, Double fee, String date) {
+    public void registerAdditionalServiceFee(String documentNumber, String description, Double fee, String date) throws EmployeeDoesNotBelongToTheSyndicateException {
 
         Affiliate affiliate = this.getAffiliateByDocumentNumber(documentNumber);
 
@@ -61,6 +61,8 @@ public class SyndicatesController {
                 list.add(serviceFee);
                 affiliate.setAdditionalServiceFees(list);
             }
+        } else {
+            throw new EmployeeDoesNotBelongToTheSyndicateException();
         }
     }
 
