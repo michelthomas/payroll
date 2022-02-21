@@ -2,7 +2,9 @@ package com.payroll.models.payment.schedule;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class LastWorkingDayOfTheMonth implements PaymentSchedule {
@@ -15,7 +17,13 @@ public class LastWorkingDayOfTheMonth implements PaymentSchedule {
     @Override
     public List<Integer> getPaydaysInTheMonthByDate(LocalDate date) {
 
-        int lastDayOfMonth = date.getMonth().maxLength();
+        int lastDayOfMonth;
+
+        if (date.getMonth() == Month.FEBRUARY && !date.isLeapYear()) {
+            lastDayOfMonth = 28;
+        } else {
+            lastDayOfMonth = date.getMonth().maxLength();
+        }
 
         DayOfWeek dayOfWeek = LocalDate.of(date.getYear(), date.getMonth(), lastDayOfMonth).getDayOfWeek();
 
