@@ -46,8 +46,8 @@ public class Weekly implements PaymentSchedule {
 
         int firstDay = date.with(TemporalAdjusters.firstInMonth(this.dayOfWeek)).getDayOfMonth();
 
-        for (int i = 1; i <= this.timesInTheMonth; i++) {
-            paydaysList.add(firstDay + (7 * i));
+        for (int i = 0; i < this.timesInTheMonth; i++) {
+            paydaysList.add(firstDay + (7 * i * 4 / this.timesInTheMonth));
         }
         return paydaysList;
     }
