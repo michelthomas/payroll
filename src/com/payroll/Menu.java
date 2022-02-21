@@ -19,7 +19,7 @@ public class Menu {
         System.out.println("4. Lançar um resultado de venda");
         System.out.println("5. Lançar uma taxa de serviço");
         System.out.println("6. Alterar detalhes de um empregado");
-        System.out.println("7. Rodar a folha de pagamento para hoje");
+        System.out.println("7. Rodar a folha de pagamento");
         System.out.println("99. Sair");
 
         int choice = Integer.parseInt(scanner.nextLine());
